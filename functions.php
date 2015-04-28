@@ -89,6 +89,56 @@ add_action('after_setup_theme', 'mirall_setup');
 function mirall_widgets_init()
 {
     register_sidebar(array(
+        'name' => __('Home Top', 'mirall'),
+        'id' => 'home-top',
+        'description' => '',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h1 class="widget-title">',
+        'after_title' => '</h1>',
+    ));
+
+    register_sidebar(array(
+        'name' => __('Home Top Right', 'mirall'),
+        'id' => 'home-top-right',
+        'description' => '',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h1 class="widget-title">',
+        'after_title' => '</h1>',
+    ));
+
+    register_sidebar(array(
+        'name' => __('Left Column', 'mirall'),
+        'id' => 'left-column',
+        'description' => '',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h1 class="widget-title">',
+        'after_title' => '</h1>',
+    ));
+
+    register_sidebar(array(
+        'name' => __('Center Column', 'mirall'),
+        'id' => 'center-column',
+        'description' => '',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h1 class="widget-title">',
+        'after_title' => '</h1>',
+    ));
+
+    register_sidebar(array(
+        'name' => __('Right Column', 'mirall'),
+        'id' => 'right-column',
+        'description' => '',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h1 class="widget-title">',
+        'after_title' => '</h1>',
+    ));
+
+    register_sidebar(array(
         'name' => __('Sidebar', 'mirall'),
         'id' => 'sidebar-1',
         'description' => '',
@@ -110,6 +160,12 @@ function mirall_scripts()
     wp_enqueue_style('mirall-style', get_stylesheet_uri());
 
     wp_enqueue_style('mirall-style-google-fonts', 'http://fonts.googleapis.com/css?family=Roboto:900,400italic');
+
+    wp_enqueue_script('mirall-script-jquery', 'http://code.jquery.com/jquery-2.1.4.js ', array(), '2.1.4', true);  
+    
+    wp_enqueue_style('mirall-style-bootstrap', 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css');
+
+    wp_enqueue_script('mirall-script-bootstrap', 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', array(), '3.3.4', true);  
 
     wp_enqueue_style('mirall-style-font-awesome', 'http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
