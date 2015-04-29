@@ -30,19 +30,6 @@ get_header(); ?>
         </div>
         <div class="col-xs-4">
             <?php dynamic_sidebar('home-top-right'); ?>
-            <div class="top-read">
-                <div class="top-read-title">Els més llegits</div>
-                <?php
-                query_posts('showposts=5&meta_key=post_views_count&orderby=meta_value_num&order=DESC');
-                if (have_posts()) : while (have_posts()) : the_post(); ?>
-                    <div class="top-read-post">
-                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                    </div>
-                <?php
-                endwhile; endif;
-                wp_reset_query();
-                ?>
-            </div>
         </div>
     </div>
     <div class="row">
