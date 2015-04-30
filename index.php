@@ -15,21 +15,22 @@ get_header(); ?>
 <div class="container">
     <div class="row">
         <div class="col-xs-8">
-                <?php dynamic_sidebar('home-top'); ?>
-                <?php
-                $myPosts = new WP_Query();
-                // category_name=popular&category_name=common&showposts=1
-                $myPosts->query('showposts=1');
+            <?php dynamic_sidebar('home-top'); ?>
+            <?php
+            $myPosts = new WP_Query();
+            // category_name=popular&category_name=common&showposts=1
+            $myPosts->query('showposts=1');
 
-                while ($myPosts->have_posts()): the_post(); ?>
-                    <?php
-                    get_template_part('content-highlight', get_post_format());
-                    break;
-                    ?>
-                <?php endwhile; ?>
+            while ($myPosts->have_posts()): the_post(); ?>
+                <?php
+                get_template_part('content-highlight', get_post_format());
+                break;
+                ?>
+            <?php endwhile; ?>
         </div>
         <div class="col-xs-4">
             <?php dynamic_sidebar('home-top-right'); ?>
+
         </div>
     </div>
     <div class="row">
@@ -77,7 +78,8 @@ get_header(); ?>
                     <?php endif; ?>
                 </main>
                 <!-- #main -->
-            </div><!-- #primary -->
+            </div>
+            <!-- #primary -->
         </div>
         <div class="col-xs-3">
             <?php dynamic_sidebar('right-column'); ?>
@@ -87,7 +89,7 @@ get_header(); ?>
     <div class="row">
         <div class="col-xs-12">
             <?php get_footer(); ?>
-        </div>        
+        </div>
     </div>
 </div>
 

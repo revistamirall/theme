@@ -161,11 +161,11 @@ function mirall_scripts()
 
     wp_enqueue_style('mirall-style-google-fonts', 'http://fonts.googleapis.com/css?family=Roboto:900,400italic');
 
-    wp_enqueue_script('mirall-script-jquery', 'http://code.jquery.com/jquery-2.1.4.js ', array(), '2.1.4', true);  
-    
+    wp_enqueue_script('mirall-script-jquery', 'http://code.jquery.com/jquery-2.1.4.js ', array(), '2.1.4', true);
+
     wp_enqueue_style('mirall-style-bootstrap', 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css');
 
-    wp_enqueue_script('mirall-script-bootstrap', 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', array(), '3.3.4', true);  
+    wp_enqueue_script('mirall-script-bootstrap', 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', array(), '3.3.4', true);
 
     wp_enqueue_style('mirall-style-font-awesome', 'http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
@@ -208,15 +208,18 @@ function setPostViews($postID)
 
 /** THE EXCERPT */
 
-function custom_excerpt_length() {
+function custom_excerpt_length()
+{
     return 20;
 }
-function new_excerpt_more() {
-    return ' <a class="read-more" href="'. get_permalink( get_the_ID() ) . '">' . __('...', 'your-text-domain') . '</a>';
+
+function new_excerpt_more()
+{
+    return ' <a class="read-more" href="' . get_permalink(get_the_ID()) . '">' . __('...', 'your-text-domain') . '</a>';
 }
 
-add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
-add_filter( 'excerpt_more', 'new_excerpt_more' );
+add_filter('excerpt_length', 'custom_excerpt_length', 999);
+add_filter('excerpt_more', 'new_excerpt_more');
 
 /** END FILTERS FOR EXCERPT */
 
@@ -256,4 +259,7 @@ require get_template_directory() . '/inc/jetpack.php';
 /**
  * Load theme widgets.
  */
-require get_template_directory() . '/widgets/mirall_top_read.php';
+$files = glob(get_template_directory() . '/widgets/*.php');
+foreach ($files as $file) {
+    require($file);
+}
