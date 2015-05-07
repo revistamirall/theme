@@ -1,22 +1,22 @@
 <?php
 
 /*
-Plugin Name: Mirall Top read post
+Plugin Name: Mirall Featured post
 Plugin URI:
-Description: Top read post of a selected category.
+Description: Show a last post of a selected category.
 Version: 1.0
 Author: Ismael Julian
 Author URI:
 License: GPLv2 or later.
 */
 
-class mirall_top_read extends WP_Widget
+class mirall_featured_post extends WP_Widget
 {
     public function __construct()
     {
-        $widget_ops = array('classname' => 'widget_top_read', 'description' => __('Show the top readed post on the website.'));
+        $widget_ops = array('classname' => 'widget_featured_post', 'description' => __('Show a last post of a selected category.'));
         $control_ops = array('width' => 400, 'height' => 350);
-        parent::__construct('top_read', __('MIRALL Top read post'), $widget_ops, $control_ops);
+        parent::__construct('featured_post', __('MIRALL Featured post'), $widget_ops, $control_ops);
     }
 
 
@@ -25,15 +25,16 @@ class mirall_top_read extends WP_Widget
         $instance = $old_instance;
         $instance['title'] = strip_tags($new_instance['title']);
         $instance['number'] = strip_tags($new_instance['number']);
+        $instance['images'] = isset($new_instance['images']);
         $instance['category'] = strip_tags($new_instance['category']);
         return $instance;
     }
 
     public function form($instance)
     {
-        $instance = wp_parse_args((array)$instance, array('title' => '', 'text' => ''));
+        $instance = wp_parse_args((array)$instance, array('role' => ''));
         $title = strip_tags($instance['title']);
-        $number = isset($instance['number']) ? absint($instance['number']) : 5;
+        $number = isset($instance['number']) ? absint($instance['number']) : 3;
         $category = isset($instance['category']) ? $instance['category'] : '';
 
         ?>
@@ -58,6 +59,11 @@ class mirall_top_read extends WP_Widget
                 ?>
             </select>
         </p>
+        <p><input id="<?php echo $this->get_field_id('images'); ?>"
+                  name="<?php echo $this->get_field_name('images'); ?>"
+                  type="checkbox" <?php checked(isset($instance['images']) ? $instance['images'] : 0); ?> />&nbsp;<label
+                for="<?php echo $this->get_field_id('images'); ?>"><?php _e('Add images'); ?></label>
+        </p>
     <?php
     }
 
@@ -65,25 +71,36 @@ class mirall_top_read extends WP_Widget
     {
         extract($args);
         ?>
-        <div class="top-read">
-            <div class="top-read-title">
+        <div class="featured">
+            <div class="featured-title">
                 <?php echo isset($instance['title']) ? $instance['title'] : 'Title not defined'; ?>
             </div>
             <?php
             $query_args = array(
                 'cat' => isset($instance['category']) ? $instance['category'] : '0',
-                'showposts' => isset($instance['number']) ? $instance['number'] : '5',
+                'showposts' => isset($instance['number']) ? $instance['number'] : '3',
                 'order' => 'DESC',
-                'orderby' => 'meta_value_num',
-                'meta_key' => 'post_views_count',
             );
             $query = new WP_Query($query_args);
-            if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>
-                <div class="top-read-post">
-                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+            if ($query->have_posts()) : while ($query->have_posts()) :
+                $query->the_post(); ?>
+                <div class="featured-post">
+                    <?php if (isset($instance['images'])) { ?>
+                        <div class="featured-post-image">
+                            <?php if (has_post_thumbnail()) {
+                                echo sprintf(the_post_thumbnail('index-thumb'));
+                            } else {
+                                echo sprintf('<img src="%s/wp-content/themes/mirall/images/default-post.jpeg" width="200" height="150" alt="%s" />', get_site_url(), get_the_title());
+                            } ?>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                    <div class="featured-post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></div>
                 </div>
             <?php
-            endwhile; endif;
+            endwhile;
+            endif;
             wp_reset_query();
             ?>
         </div>
@@ -91,10 +108,9 @@ class mirall_top_read extends WP_Widget
     }
 }
 
-function register_mirall_top_read()
+function register_mirall_featured_post()
 {
-    register_widget('mirall_top_read');
+    register_widget('mirall_featured_post');
 }
 
-add_action('widgets_init', 'register_mirall_top_read');
-?>
+add_action('widgets_init', 'register_mirall_featured_post');
