@@ -17,8 +17,10 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
 <script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,900' rel='stylesheet' type='text/css'>
 
 <?php wp_head(); ?>
+
 </head>
 
 <body <?php body_class(); ?>>
@@ -40,13 +42,14 @@
 		<div class="container">
             <div class="row">
                 <div class="col-xs-7">
-                    <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+                    <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+                    <span class="title-black">REVISTA</span> <span class="title-green">MIRALL</span></a></h1>
                     <h4 class="site-description"><?php bloginfo( 'description' ); ?></h4>  
                 </div>
                 <div class="col-xs-5">
                     <div class="site-social">
                         <p>
-                            <a><span class="social-count">750.185</span><i class="fa fa-facebook"></i></a> <a><span class="social-count">36k</span><i class="fa fa-twitter"></i></a> <a><span class="social-count">371k</span><i class="fa fa-google-plus-square"></i></a>
+                            <a href="https://ca-es.facebook.com/RevistaMirall" target="_blank"><span class="social-count">750.185</span><i class="fa fa-facebook"></i></a> <a href="https://twitter.com/revista_mirall" target="_blank"><span class="social-count">36k</span><i class="fa fa-twitter"></i></a>
                         </p>
                     </div>
                 </div>

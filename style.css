@@ -1078,7 +1078,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -4484,11 +4484,13 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #9d9d9d;
 }
 .navbar-inverse .navbar-nav > li > a {
-  color: #9d9d9d;
+  /*color: #9d9d9d;*/
+  color: #ffffff;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-  color: #ffffff;
+  /*color: #ffffff;*/
+  color: #9d9d9d;
   background-color: transparent;
 }
 .navbar-inverse .navbar-nav > .active > a,
@@ -6874,6 +6876,16 @@ Entry Footer
 // YOUR CUSTOM STYLES
 // ------------------ */
 
+body{
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.featured-post-title,
+.custom-font-family {
+  font-family: 'Roboto', sans-serif;
+}
+
 /*
 // HEADER
 // ------------------ */
@@ -6891,7 +6903,8 @@ Entry Footer
 #masthead h1.site-title{
 	text-transform: uppercase;
 	font-weight: bold;
-	font-size: 50px
+	font-size: 50px;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #masthead h1.site-title > a{
@@ -6900,6 +6913,14 @@ Entry Footer
 
 #masthead h1.site-title > a:hover{
 	text-decoration: none;
+}
+
+#masthead span.title-black{
+  color: #000;
+}
+
+#masthead span.title-green{
+  color: #017d3b;
 }
 
 .site-social {
@@ -6941,6 +6962,12 @@ a .fa-google-plus-square {
 	text-transform: uppercase;
 }
 
+#site-navigation{
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  font-size: 14px;
+}
 
 /*
 // POSTS MOST READ
@@ -6955,6 +6982,11 @@ a .fa-google-plus-square {
   border-color: lightgrey;
   border-radius: 0;
 }
+.panel-most-read > .panel-heading > .panel-title{
+  text-transform: uppercase;
+  top: -2px;
+  position: relative;
+}
 .panel-most-read > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #dddddd;
 }
@@ -6966,10 +6998,16 @@ a .fa-google-plus-square {
   border-bottom-color: #dddddd;
 }
 
+.panel-most-read > .panel-body .top-read-post{
+  border-bottom: 1px solid #088A08;
+  margin-bottom: 3px;
+}
+
 .panel-most-read > .panel-heading > .panel-title span {
 	padding: 5px 10px;
-	background: darkgreen;
+	background: #04B431;
 	color: #FFF;
+  font-size: 12px;
 }
 
 /*
