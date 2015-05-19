@@ -145,7 +145,6 @@ class mirall_latest_post extends WP_Widget
         }
 
         ?>
-        </div>
     <?php
     }
 }

@@ -63,29 +63,33 @@ class mirall_top_read extends WP_Widget
 
     function widget($args, $instance)
     {
-        extract($args);
+       extract($args);
         ?>
-        <div class="top-read">
-            <div class="top-read-title">
-                <?php echo isset($instance['title']) ? $instance['title'] : 'Title not defined'; ?>
+        <div class="panel panel-most-read">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span><?php echo isset($instance['title']) ? $instance['title'] : 'Title not defined'; ?></span>
+                </h3>
             </div>
-            <?php
-            $query_args = array(
-                'cat' => isset($instance['category']) ? $instance['category'] : '0',
-                'showposts' => isset($instance['number']) ? $instance['number'] : '5',
-                'order' => 'DESC',
-                'orderby' => 'meta_value_num',
-                'meta_key' => 'post_views_count',
-            );
-            $query = new WP_Query($query_args);
-            if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>
-                <div class="top-read-post">
-                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                </div>
-            <?php
-            endwhile; endif;
-            wp_reset_query();
-            ?>
+            <div class="panel-body">
+                <?php
+                    $query_args = array(
+                        'cat' => isset($instance['category']) ? $instance['category'] : '0',
+                        'showposts' => isset($instance['number']) ? $instance['number'] : '5',
+                        'order' => 'DESC',
+                        'orderby' => 'meta_value_num',
+                        'meta_key' => 'post_views_count',
+                    );
+                    $query = new WP_Query($query_args);
+                    if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>
+                        <div class="top-read-post">
+                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                        </div>
+                    <?php
+                    endwhile; endif;
+                    wp_reset_query();
+                ?>
+            </div>
         </div>
     <?php
     }

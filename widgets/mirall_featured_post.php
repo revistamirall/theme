@@ -71,38 +71,43 @@ class mirall_featured_post extends WP_Widget
     {
         extract($args);
         ?>
-        <div class="featured">
-            <div class="featured-title">
-                <?php echo isset($instance['title']) ? $instance['title'] : 'Title not defined'; ?>
+        <div class="panel panel-featured-post">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <span><?php echo isset($instance['title']) ? $instance['title'] : 'Title not defined'; ?></span>
+                </h3>
             </div>
-            <?php
-            $query_args = array(
-                'cat' => isset($instance['category']) ? $instance['category'] : '0',
-                'showposts' => isset($instance['number']) ? $instance['number'] : '3',
-                'order' => 'DESC',
-            );
-            $query = new WP_Query($query_args);
-            if ($query->have_posts()) : while ($query->have_posts()) :
-                $query->the_post(); ?>
-                <div class="featured-post">
-                    <?php if (isset($instance['images'])) { ?>
-                        <div class="featured-post-image">
-                            <?php if (has_post_thumbnail()) {
-                                echo sprintf(the_post_thumbnail('index-thumb'));
-                            } else {
-                                echo sprintf('<img src="%s/wp-content/themes/mirall/images/default-post.jpeg" width="200" height="150" alt="%s" />', get_site_url(), get_the_title());
-                            } ?>
+            <div class="panel-body">
+                <?php
+                    $query_args = array(
+                        'cat' => isset($instance['category']) ? $instance['category'] : '0',
+                        'showposts' => isset($instance['number']) ? $instance['number'] : '3',
+                        'order' => 'DESC',
+                    );
+                    $query = new WP_Query($query_args);
+                    if ($query->have_posts()) : while ($query->have_posts()) :
+                        $query->the_post(); ?>
+                        <div class="featured-post">
+                            <?php if (isset($instance['images'])) { ?>
+                                <div class="featured-post-image">
+                                    <?php if (has_post_thumbnail()) {
+                                        echo sprintf(the_post_thumbnail());
+                                    } else {
+                                        echo sprintf('<img src="%s/wp-content/themes/mirall/images/default-post.jpeg" width="200" height="150" alt="%s" />', get_site_url(), get_the_title());
+                                    } ?>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                            <div class="featured-post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></div>
+                            <div class="featured-post-resume"><?php the_excerpt(); ?></div>
                         </div>
                     <?php
-                    }
+                    endwhile;
+                    endif;
+                    wp_reset_query();
                     ?>
-                    <div class="featured-post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></div>
-                </div>
-            <?php
-            endwhile;
-            endif;
-            wp_reset_query();
-            ?>
+            </div>
         </div>
     <?php
     }
